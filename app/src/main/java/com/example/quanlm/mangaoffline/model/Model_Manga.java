@@ -5,14 +5,35 @@ package com.example.quanlm.mangaoffline.model;
  */
 
 public class Model_Manga {
-    String id, mangaName, mangaDescription;
+    int id;
+    String mangaName, mangaDescription;
     boolean isDownloaded;
+    int totalChaps;
+    int currentChap;
 
-    public Model_Manga(String id, String mangaName, String mangaDescription, boolean isDownloaded) {
+    public Model_Manga(int id, String mangaName, String mangaDescription, boolean isDownloaded, int totalChaps, int currentChap) {
         this.id = id;
         this.mangaName = mangaName;
         this.mangaDescription = mangaDescription;
         this.isDownloaded = isDownloaded;
+        this.totalChaps = totalChaps;
+        this.currentChap = currentChap;
+    }
+
+    public int getTotalChaps() {
+        return totalChaps;
+    }
+
+    public void setTotalChaps(int totalChaps) {
+        this.totalChaps = totalChaps;
+    }
+
+    public int getCurrentChap() {
+        return currentChap;
+    }
+
+    public void setCurrentChap(int currentChap) {
+        this.currentChap = currentChap;
     }
 
     public boolean isDownloaded() {
@@ -23,11 +44,11 @@ public class Model_Manga {
         isDownloaded = downloaded;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

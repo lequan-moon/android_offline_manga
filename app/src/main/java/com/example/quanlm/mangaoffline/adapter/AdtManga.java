@@ -41,7 +41,7 @@ public class AdtManga extends RecyclerView.Adapter<AdtManga.MangaViewHolder> {
     @Override
     public void onBindViewHolder(MangaViewHolder holder, int position) {
         Model_Manga manga = lstManga.get(position);
-        holder.txtMangaId.setText(manga.getId());
+        holder.txtMangaId.setText(String.valueOf(manga.getId()));
         holder.txtMangaName.setText(manga.getMangaName());
         holder.txtMangaDescription.setText(manga.getMangaDescription());
         if (manga.isDownloaded()) {
@@ -74,7 +74,7 @@ public class AdtManga extends RecyclerView.Adapter<AdtManga.MangaViewHolder> {
                 @Override
                 public void onClick(View v) {
                     for (OnMangaSelect listener : lstMangaSelectsListeners) {
-                        listener.onSelect(txtMangaId.getText().toString());
+                        listener.onSelect(Integer.parseInt(txtMangaId.getText().toString()));
                     }
                 }
             });
@@ -82,6 +82,6 @@ public class AdtManga extends RecyclerView.Adapter<AdtManga.MangaViewHolder> {
     }
 
     public interface OnMangaSelect {
-        void onSelect(String mangaID);
+        void onSelect(int mangaID);
     }
 }

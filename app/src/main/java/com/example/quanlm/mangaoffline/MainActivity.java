@@ -84,9 +84,9 @@ public class MainActivity extends FragmentActivity
 
     private void initControls() {
         MangaListFragment mangaListFragment = new MangaListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(MangaListFragment.MANGA_LOGIC, this.mangaLogic);
-        mangaListFragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putSerializable(MangaListFragment.MANGA_LOGIC, this.mangaLogic);
+//        mangaListFragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mangaListFragment).commit();
     }
 

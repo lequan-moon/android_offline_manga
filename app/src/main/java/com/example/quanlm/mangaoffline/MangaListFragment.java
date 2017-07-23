@@ -72,7 +72,8 @@ public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelec
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mangaLogic = (LogicManga) getArguments().getSerializable(MANGA_LOGIC);
+//            mangaLogic = (LogicManga) getArguments().getSerializable(MANGA_LOGIC);
+
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
@@ -91,6 +92,7 @@ public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelec
         rcvListMangas = (RecyclerView) getView().findViewById(R.id.lstMangas);
 
         // Init Recyclerview list manga
+        mangaLogic = new LogicManga(getActivity());
         lstMangas = mangaLogic.getListManga();
         AdtManga adtManga = new AdtManga(getActivity(), lstMangas, this);
         RecyclerView.LayoutManager layoutMng = new LinearLayoutManager(getActivity());

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quanlm.mangaoffline.adapter.AdtChapter;
+import com.example.quanlm.mangaoffline.config.Constants;
 import com.example.quanlm.mangaoffline.logic.LogicManga;
 import com.example.quanlm.mangaoffline.model.Model_Chapter;
 import com.example.quanlm.mangaoffline.model.Model_Manga;
@@ -39,7 +40,7 @@ public class ActMangaDetail extends AppCompatActivity {
         txtIsDownloaded = (TextView) findViewById(R.id.txtIsDownloaded);
 
         Bundle param = getIntent().getBundleExtra("param");
-        int selectedMangaId = param.getInt(MainActivity.SELECTED_MANGA_ID);
+        int selectedMangaId = param.getInt(Constants.SELECTED_MANGA_ID);
         Model_Manga manga = logicManga.getManga(selectedMangaId);
 
         txtMangaName.setText(manga.getMangaName());

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.quanlm.mangaoffline.model.Model_Chapter;
 import com.example.quanlm.mangaoffline.model.Model_Manga;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by QuanLM on 7/17/2017.
  */
 
-public class LogicManga {
+public class LogicManga implements Serializable{
     Context mContext;
 
     public LogicManga(Context mContext) {

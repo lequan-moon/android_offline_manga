@@ -9,6 +9,8 @@ import android.os.Environment;
 public class Constants {
     public static String SD_CARD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/offline_manga/";
 
+    public static final String SELECTED_MANGA_ID = "com.example.quanlm.mangaoffline.selected_manga_id";
+
     // Table manga
     public static final String TB_MANGA = "tblManga";
     public static final String MANGA_ID = "manga_id";

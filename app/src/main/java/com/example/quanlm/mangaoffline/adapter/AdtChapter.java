@@ -12,6 +12,7 @@ import com.example.quanlm.mangaoffline.model.Model_Chapter;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,11 +22,15 @@ import java.util.List;
 public class AdtChapter extends RecyclerView.Adapter<AdtChapter.ChapterViewHolder> {
     Context mContext;
     List<Model_Chapter> lstChapter;
-    List<OnChapterSelect> lstChapterSelectListener;
+    List<OnChapterSelect> lstChapterSelectListener = new ArrayList<>();
 
     public AdtChapter(Context mContext, List<Model_Chapter> lstChapter) {
         this.mContext = mContext;
         this.lstChapter = lstChapter;
+    }
+
+    public void addListener(OnChapterSelect listener) {
+        this.lstChapterSelectListener.add(listener);
     }
 
     @Override
@@ -47,7 +52,7 @@ public class AdtChapter extends RecyclerView.Adapter<AdtChapter.ChapterViewHolde
         return lstChapter.size();
     }
 
-    class ChapterViewHolder extends RecyclerView.ViewHolder{
+    class ChapterViewHolder extends RecyclerView.ViewHolder {
         TextView txtChapterName;
         TextView txtChapterId;
 
@@ -58,8 +63,10 @@ public class AdtChapter extends RecyclerView.Adapter<AdtChapter.ChapterViewHolde
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    for (OnChapterSelect listener : lstChapterSelectListener) {
-                        listener.onSelect(Integer.parseInt(txtChapterId.getText().toString()));
+                    if (lstChapterSelectListener.size() > 0) {
+                        for (OnChapterSelect listener : lstChapterSelectListener) {
+                            listener.onSelect(Integer.parseInt(txtChapterId.getText().toString()));
+                        }
                     }
                 }
             });

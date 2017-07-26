@@ -33,14 +33,11 @@ import java.util.List;
 public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelect {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String MANGA_LOGIC = "mangalogic";
+    private static final String ARG_FILTER = "filter";
+//    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private String mFilter;
     private OnFragmentInteractionListener mListener;
 
     LogicManga mangaLogic;
@@ -55,15 +52,13 @@ public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelec
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param filter Parameter 1.
      * @return A new instance of fragment MangaListFragment.
      */
-    public static MangaListFragment newInstance(String param1, String param2) {
+    public static MangaListFragment newInstance(String filter) {
         MangaListFragment fragment = new MangaListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,10 +67,9 @@ public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelec
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mangaLogic = (LogicManga) getArguments().getSerializable(MANGA_LOGIC);
-
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mFilter = getArguments().getString(ARG_FILTER);
         }
+        Toast.makeText(getActivity(), "Begin with mFilter:" + mFilter, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -93,7 +87,7 @@ public class MangaListFragment extends Fragment implements AdtManga.OnMangaSelec
 
         // Init Recyclerview list manga
         mangaLogic = new LogicManga(getActivity());
-        lstMangas = mangaLogic.getListManga();
+        lstMangas = mangaLogic.getListManga(this.mFilter);
         AdtManga adtManga = new AdtManga(getActivity(), lstMangas, this);
         RecyclerView.LayoutManager layoutMng = new LinearLayoutManager(getActivity());
         rcvListMangas.setLayoutManager(layoutMng);

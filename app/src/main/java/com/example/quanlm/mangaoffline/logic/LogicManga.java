@@ -25,9 +25,21 @@ public class LogicManga implements Serializable{
         * online source is webservice
         * offline source is sqlite
         */
-    public List<Model_Manga> getListManga(){
+    public List<Model_Manga> getListManga(String filter){
         SQLiteHandler dbHandler = new SQLiteHandler(mContext);
-        List<Model_Manga> lstMangas = dbHandler.getMangas();
+        List<Model_Manga> lstMangas;
+        switch (filter) {
+            case "All":
+                lstMangas = dbHandler.getAllMangas();
+                break;
+            case "Favorite":
+                lstMangas = dbHandler.getFavoriteMangas();
+                break;
+            default:
+                lstMangas = dbHandler.getAllMangas();
+                break;
+        }
+
         return lstMangas;
     }
 
@@ -46,8 +58,8 @@ public class LogicManga implements Serializable{
     public void initDatabase() {
         SQLiteHandler dbHandler = new SQLiteHandler(mContext);
         dbHandler.addManga(new Model_Manga(1, "manga 1", "manga 1 description", true, 10, 1));
-        dbHandler.addManga(new Model_Manga(2, "manga 2", "manga 3 description", true, 10, 1));
-        dbHandler.addManga(new Model_Manga(3, "manga 3", "manga 4 description", true, 10, 1));
+        dbHandler.addManga(new Model_Manga(2, "manga 2", "manga 2 description", false, 10, 1));
+        dbHandler.addManga(new Model_Manga(3, "manga 3", "manga 3 description", false, 10, 1));
         dbHandler.addManga(new Model_Manga(4, "manga 4", "manga 4 description", true, 10, 1));
 
         dbHandler.addChapter(new Model_Chapter(1, "chap 1", "/manga1/chapter1"));

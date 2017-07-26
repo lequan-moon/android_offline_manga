@@ -83,10 +83,7 @@ public class MainActivity extends FragmentActivity
     }
 
     private void initControls() {
-        MangaListFragment mangaListFragment = new MangaListFragment();
-//        Bundle args = new Bundle();
-//        args.putSerializable(MangaListFragment.MANGA_LOGIC, this.mangaLogic);
-//        mangaListFragment.setArguments(args);
+        MangaListFragment mangaListFragment = MangaListFragment.newInstance(Constants.ALL);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mangaListFragment).commit();
     }
 
@@ -128,18 +125,13 @@ public class MainActivity extends FragmentActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_all) {
+            MangaListFragment mangaListFragment = MangaListFragment.newInstance(Constants.ALL);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mangaListFragment).commit();
 
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_favorite) {
+            MangaListFragment mangaListFragment = MangaListFragment.newInstance(Constants.FAVORITE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mangaListFragment).commit();
 
         }
 

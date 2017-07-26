@@ -56,11 +56,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         database = this.getWritableDatabase();
     }
 
-    public List<Model_Manga> getMangas() {
+    public List<Model_Manga> getAllMangas() {
         List<Model_Manga> lstManga = new ArrayList<>();
         open();
 
-        String selectAllManga = "SELECT "
+        String query = "SELECT "
                 + Constants.MANGA_ID + ", "
                 + Constants.MANGA_NAME + ", "
                 + Constants.MANGA_DESCRIPTION + ", "
@@ -68,25 +68,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + Constants.MANGA_CURRENT_CHAP + ", "
                 + Constants.MANGA_IS_DOWNLOADED
                 + " FROM " + Constants.TB_MANGA;
-        Cursor mangas = database.rawQuery(selectAllManga, null);
-
-        if (mangas.moveToFirst()) {
-            while (!mangas.isAfterLast()) {
-                // Get all fields
-                int id = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_ID));
-                String mangaName = mangas.getString(mangas.getColumnIndex(Constants.MANGA_NAME));
-                String mangaDescription = mangas.getString(mangas.getColumnIndex(Constants.MANGA_DESCRIPTION));
-                int mangaTotalChap = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_TOTAL_CHAPS));
-                int mangaCurrentChap = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_CURRENT_CHAP));
-                boolean mangaIsDownloaded = (mangas.getInt(mangas.getColumnIndex(Constants.MANGA_IS_DOWNLOADED)) == 1);
-
-                // Create and add manga into list
-                Model_Manga manga = new Model_Manga(id, mangaName, mangaDescription, mangaIsDownloaded, mangaTotalChap, mangaCurrentChap);
-                lstManga.add(manga);
-
-                mangas.moveToNext();
-            }
-        }
+        lstManga = queryMangas(query);
         return lstManga;
     }
 
@@ -176,5 +158,48 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+    public List<Model_Manga> getFavoriteMangas() {
+        List<Model_Manga> lstManga;
+        open();
+
+        String query = "SELECT "
+                + Constants.MANGA_ID + ", "
+                + Constants.MANGA_NAME + ", "
+                + Constants.MANGA_DESCRIPTION + ", "
+                + Constants.MANGA_TOTAL_CHAPS + ", "
+                + Constants.MANGA_CURRENT_CHAP + ", "
+                + Constants.MANGA_IS_DOWNLOADED
+                + " FROM " + Constants.TB_MANGA
+                + " WHERE " + Constants.MANGA_IS_DOWNLOADED + " = 1;" ;
+
+        lstManga = queryMangas(query);
+
+        return lstManga;
+    }
+
+    private List<Model_Manga> queryMangas(String query) {
+        List<Model_Manga> lstManga = new ArrayList<>();
+        Cursor mangas = database.rawQuery(query, null);
+
+        if (mangas.moveToFirst()) {
+            while (!mangas.isAfterLast()) {
+                // Get all fields
+                int id = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_ID));
+                String mangaName = mangas.getString(mangas.getColumnIndex(Constants.MANGA_NAME));
+                String mangaDescription = mangas.getString(mangas.getColumnIndex(Constants.MANGA_DESCRIPTION));
+                int mangaTotalChap = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_TOTAL_CHAPS));
+                int mangaCurrentChap = mangas.getInt(mangas.getColumnIndex(Constants.MANGA_CURRENT_CHAP));
+                boolean mangaIsDownloaded = (mangas.getInt(mangas.getColumnIndex(Constants.MANGA_IS_DOWNLOADED)) == 1);
+
+                // Create and add manga into list
+                Model_Manga manga = new Model_Manga(id, mangaName, mangaDescription, mangaIsDownloaded, mangaTotalChap, mangaCurrentChap);
+                lstManga.add(manga);
+
+                mangas.moveToNext();
+            }
+        }
+        return lstManga;
     }
 }

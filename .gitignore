@@ -1,0 +1,16 @@
+
+build/generated/
+
+build/android-profile/
+
+\.idea/
+
+\.gradle/3\.3/taskArtifacts/
+
+\.gradle/3\.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/
+
+\.gradle/3\.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/
+
+build/intermediates/dex-cache/
+
+local\.properties

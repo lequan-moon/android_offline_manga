@@ -7,6 +7,8 @@ import android.os.Environment;
  */
 
 public class Constants {
+    public static final String ALL = "All";
+    public static final String FAVORITE = "Favorite";
     public static String SD_CARD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/offline_manga/";
 
     public static final String SELECTED_MANGA_ID = "com.example.quanlm.mangaoffline.selected_manga_id";
